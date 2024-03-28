@@ -1,0 +1,26 @@
+/* styles.css */
+
+
+.navbar {
+  background-color: #4CAF50; /* Zielony kolor tła */
+  border: black; /* Brak obramowania */
+}
+
+.navbar-default .navbar-brand {
+  color: #ffffff; /* Biały kolor tekstu */
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: #ffffff; /* Biały kolor tekstu */
+}
+
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {
+  color: #ffffff; /* Biały kolor tekstu po najechaniu myszą */
+  background-color: #357F2D; /* Zielony kolor tła po najechaniu myszą */
+}
+
+.navbar-default .navbar-img {
+    max-width: 10%; /* Adjust as needed */
+    max-height: 10%; /* Adjust as needed */
+}
