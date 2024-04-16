@@ -1,0 +1,43 @@
+
+[
+    {
+    "breed": "buldog amerykanski",
+    "text": "Despite their menacing appearance, American Bulldogs are known for being friendly, gentle, and excellent for families."
+    },
+    {
+    "breed": "dalmatynczyk",
+    "text": "Dalmatians are known for their distinctive coat of white with black or brown spots. They are also very energetic dogs, perfect for outdoor activities."
+    },
+    {
+    "breed": "eurasier",
+    "text": "The Eurasier is a breed with a calm and balanced character. They are loyal to their owners and form strong attachments to them."
+    },
+    {
+    "breed": "golden retriever",
+    "text": "Golden Retrievers are known for their friendly and gentle nature. They are also very intelligent and easy to train, making them popular family and companion dogs."
+    },
+    {
+    "breed": "husky syberyjski",
+    "text": "Siberian Huskies are sled dogs known for their energy, endurance, and unique appearance. They have a double coat that helps them survive in harsh climatic conditions."
+    },
+    {
+    "breed": "maltanski",
+    "text": "Maltese are small companion dogs known for their long, silky coat. They are also very active and attached to their owners."
+    },
+    {
+    "breed": "owczarek austarlijski",
+    "text": "Australian Shepherds are herding dogs known for their intelligence, energy, and loyalty to their family."
+    },
+    {
+    "breed": "owczarek niemiecki",
+    "text": "German Shepherds are one of the most popular dog breeds in the world. They are known for their intelligence, loyalty, and versatility, making them excellent working, family, and companion dogs."
+    },
+    {
+    "breed": "szpic wilczy",
+    "text": "The German Spitz, also known as the Wolfspitz, is a breed with a long history. They are energetic, intelligent dogs that require regular physical and mental activity."
+    },
+    {
+    "breed": "terier",
+    "text": "Terriers are a diverse group of dogs characterized by courage, liveliness, and determination. There are many different terrier breeds, each with its own unique characteristics and personality."
+    }
+    ]
