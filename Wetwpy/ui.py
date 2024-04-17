@@ -12,6 +12,7 @@ def main():
     button_home = st.sidebar.button("Strona główna")
     button_recognize = st.sidebar.button("Rozpoznaj psiaka")
     button_discover = st.sidebar.button("Odkryj psiaka")
+    button_edit = st.sidebar.button("Dodaj/usuń dane psiaka") 
 
     # Main page content
     if button_home:
@@ -20,6 +21,8 @@ def main():
         st.session_state.menu_choice = "Rozpoznaj psiaka"
     elif button_discover:
         st.session_state.menu_choice = "Odkryj psiaka"
+    elif button_edit:
+        st.session_state.menu_choice = "Dodaj/usuń dane psiaka"
 
     # Show content based on selected option
     if st.session_state.menu_choice == "Strona główna":

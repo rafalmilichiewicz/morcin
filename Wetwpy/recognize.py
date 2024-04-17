@@ -11,8 +11,12 @@ def recognize_dog():
         recognize_button = st.button("Rozpoznaj psiaka", key="button1")
         if recognize_button:
             with st.spinner("Rozpoznawanie psa..."):
-                img_path = 'image.jpg'  # Replace 'image.jpg' with the path to the dog image you want to classify
-                predictions = model.predict_breed(img_path)  # Call predict_breed function from the imported model module with the image path
+                # Save the uploaded image to a temporary file
+                temp_file_path = 'temp_image.jpg'
+                with open(temp_file_path, 'wb') as f:
+                    f.write(uploaded_image.read())
+                # Call predict_breed function from the imported model module with the image path
+                predictions = model.predict_breed(temp_file_path)
             st.write("Wyniki rozpoznania:")
             for prediction in predictions:
                 st.write(prediction)

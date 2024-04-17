@@ -13,17 +13,27 @@ def discover_dog():
     )
     cursor = conn.cursor()
 
-    # Wykonanie zapytania o wyświetlenie danych
-    select_query = "SELECT * FROM dogs LIMIT 1"
+    # Wykonanie zapytania o wszystkie psy
+    select_query = "SELECT * FROM dogs"
     cursor.execute(select_query)
-    result = cursor.fetchone()
+    results = cursor.fetchall()
+
+    # Lista do przechowywania tytułów psów
+    dog_names = [result[1] for result in results]
+
+    # Wybór psa z listy rozwijanej
+    selected_dog_name = st.selectbox("Select a dog", dog_names)
+
+    # Pobranie informacji o wybranym psie
+    selected_dog = [result for result in results if result[1] == selected_dog_name][0]
+
     # Wyświetlenie obrazka
-    st.image(result[2], width=300)  # Zmniejszenie szerokości obrazka
+    st.image(selected_dog[2], width=300)  # Zmniejszenie szerokości obrazka
     # Wyświetlenie danych
     st.header("Dog Information")
     st.markdown("---")  # Separator
-    st.write("**Breed:**", result[1])
-    st.write("**Curiosity:**", result[3])
+    st.write("**Breed:**", selected_dog[1])
+    st.write("**Curiosity:**", selected_dog[3])
 
     # Zamknięcie połączenia
     conn.close()
