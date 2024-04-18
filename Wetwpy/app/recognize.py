@@ -1,5 +1,5 @@
 import streamlit as st
-import ML.model as model  # Importing the model module
+import model.model as ml
 
 def recognize_dog():
     uploaded_image = st.file_uploader("Wybierz obraz do rozpoznania", type=["png", "jpg", "jpeg"])
@@ -16,7 +16,7 @@ def recognize_dog():
                 with open(temp_file_path, 'wb') as f:
                     f.write(uploaded_image.read())
                 # Call predict_breed function from the imported model module with the image path
-                predictions = model.predict_breed(temp_file_path)
+                predictions = ml.predict_breed(temp_file_path)
             st.write("Wyniki rozpoznania:")
             for prediction in predictions:
                 st.write(prediction)
