@@ -5,6 +5,10 @@ from discover import discover_dog
 from edit import edit_dog
 
 def main():
+    # Initialize session state
+    if "menu_choice" not in st.session_state:
+        st.session_state.menu_choice = "Strona główna"
+    
     menu_choice = show_ui()
     
     if menu_choice == "Rozpoznaj psiaka":
