@@ -1,10 +1,10 @@
 import streamlit as st
 
-# Initialize session state
-if "menu_choice" not in st.session_state:
-    st.session_state.menu_choice = "Strona główna"
-
 def main():
+    # Initialize session state
+    if "menu_choice" not in st.session_state:
+        st.session_state.menu_choice = "Strona główna"
+
     st.title("Weterynarz")
 
     # Sidebar menu
