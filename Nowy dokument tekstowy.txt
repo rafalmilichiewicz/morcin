@@ -1,0 +1,4 @@
+mikroserwisy komunikujące się ze sobą za pomocą requestów
+
+przygotować api do obsługi ML ML jako klasa
+
