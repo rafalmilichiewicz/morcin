@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql-dogs-db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: dogs_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      
+  dogs_microservice:
+    build:
+      context: ./DB
+      dockerfile: Dockerfile
+    container_name: dogs-microservice
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./DB:/app
+      - ./images:/app/images
+    depends_on:
+      - db
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 10s
+      retries: 5
+
+  streamlit_app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: streamlit-app
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./app:/app
+      - ./images:/app/images
+    depends_on:
+      - dogs_microservice
+
+volumes:
+  mysql_data:
