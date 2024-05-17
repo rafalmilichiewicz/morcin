@@ -1,5 +1,5 @@
 import streamlit as st
-import model.model as ml
+from ..model import model as ml
 
 def recognize_dog():
     uploaded_image = st.file_uploader("Wybierz obraz do rozpoznania", type=["png", "jpg", "jpeg"])

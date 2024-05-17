@@ -1,8 +1,8 @@
 import streamlit as st
-from app.ui import main as show_ui
-from app.recognize import recognize_dog
-from app.discover import discover_dog
-from app.edit import edit_dog
+from ui import main as show_ui
+from recognize import recognize_dog
+from discover import discover_dog
+from edit import edit_dog
 
 def main():
     # Initialize session state
