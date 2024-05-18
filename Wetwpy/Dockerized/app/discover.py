@@ -15,19 +15,22 @@ def discover_dog():
     selected_dog_name = st.selectbox("Select a dog", dog_names)
 
     # Pobranie informacji o wybranym psie
-    selected_dog = next(dog for dog in dogs if dog['breed'] == selected_dog_name)
+    selected_dog = next((dog for dog in dogs if dog['breed'] == selected_dog_name), None)
 
-    # Decode image from hex
-    image_data = bytes.fromhex(selected_dog['image'])
-    image = Image.open(BytesIO(image_data))
+    if selected_dog:
+        # Decode image from hex
+        image_data = bytes.fromhex(selected_dog['image'])
+        image = Image.open(BytesIO(image_data))
 
-    # Wyświetlenie obrazka
-    st.image(image, width=300)  # Zmniejszenie szerokości obrazka
-    # Wyświetlenie danych
-    st.header("Dog Information")
-    st.markdown("---")  # Separator
-    st.write("**Breed:**", selected_dog['breed'])
-    st.write("**Curiosity:**", selected_dog['curiosity'])
+        # Wyświetlenie obrazka
+        st.image(image, width=300)  # Zmniejszenie szerokości obrazka
+        # Wyświetlenie danych
+        st.header("Dog Information")
+        st.markdown("---")  # Separator
+        st.write("**Breed:**", selected_dog['breed'])
+        st.write("**Curiosity:**", selected_dog['curiosity'])
+    else:
+        st.error("Dog not found. Please select a valid dog.")
 
 if __name__ == "__main__":
     st.title("Discover a Dog")

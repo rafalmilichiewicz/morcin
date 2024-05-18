@@ -7,13 +7,11 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: dogs_db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
     ports:
-      - "3306:3306"
+      - "3307:3307"
     volumes:
       - mysql_data:/var/lib/mysql
-      
+
   dogs_microservice:
     build:
       context: ./DB
@@ -26,8 +24,14 @@ services:
       - ./images:/app/images
     depends_on:
       - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3307
+      - DB_USER=root
+      - DB_PASSWORD=password
+      - DB_NAME=dogs_db
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      test: ["CMD-SHELL", "curl -f http://localhost:5000/health || exit 1"]
       interval: 10s
       retries: 5
 
@@ -41,8 +45,6 @@ services:
     volumes:
       - ./app:/app
       - ./images:/app/images
-    depends_on:
-      - dogs_microservice
 
 volumes:
   mysql_data:
