@@ -1,7 +1,6 @@
 import os
 import json
 import requests
-
 # Ścieżka do folderu z obrazami
 folder_path = "images/"
 
