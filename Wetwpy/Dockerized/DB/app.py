@@ -8,7 +8,7 @@ def get_dogs():
     conn = mysql.connector.connect(
         host="db",
         user="root",
-        password="password",  # Ustaw swoje hasło
+        password="password",
         database="dogs_db"
     )
     cursor = conn.cursor()
@@ -18,23 +18,36 @@ def get_dogs():
     conn.close()
     return jsonify(dogs)
 
-@app.route('/dog/<breed>', methods=['GET'])
-def get_dog(breed):
+@app.route('/dogs', methods=['POST'])
+def add_dog():
+    data = request.json
     conn = mysql.connector.connect(
         host="db",
         user="root",
-        password="password",  # Ustaw swoje hasło
+        password="password",
         database="dogs_db"
     )
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM dogs WHERE breed = %s", (breed,))
-    result = cursor.fetchone()
-    if result:
-        dog = {'id': result[0], 'breed': result[1], 'image': result[2].hex(), 'curiosity': result[3]}
-    else:
-        dog = None
+    insert_query = "INSERT INTO dogs (breed, image, curiosity) VALUES (%s, %s, %s)"
+    cursor.execute(insert_query, (data['breed'], bytes.fromhex(data['image']), data['curiosity']))
+    conn.commit()
     conn.close()
-    return jsonify(dog)
+    return jsonify({'message': 'Dog added successfully'}), 200
+
+@app.route('/dogs/<breed>', methods=['DELETE'])
+def delete_dog(breed):
+    conn = mysql.connector.connect(
+        host="db",
+        user="root",
+        password="password",
+        database="dogs_db"
+    )
+    cursor = conn.cursor()
+    delete_query = "DELETE FROM dogs WHERE breed = %s"
+    cursor.execute(delete_query, (breed,))
+    conn.commit()
+    conn.close()
+    return jsonify({'message': f'Dog {breed} deleted successfully'}), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
