@@ -1,43 +1,42 @@
-
 [
     {
-    "breed": "buldog amerykanski",
-    "text": "Despite their menacing appearance, American Bulldogs are known for being friendly, gentle, and excellent for families."
+        "breed": "buldog amerykanski",
+        "text": "Pomimo groźnego wyglądu, buldogi amerykańskie są znane z przyjaznego i łagodnego charakteru oraz doskonale nadają się dla rodzin."
     },
     {
-    "breed": "dalmatynczyk",
-    "text": "Dalmatians are known for their distinctive coat of white with black or brown spots. They are also very energetic dogs, perfect for outdoor activities."
+        "breed": "dalmatynczyk",
+        "text": "Dalmatyńczyki są znane ze swojego charakterystycznego białego umaszczenia z czarnymi lub brązowymi plamami. Są również bardzo energicznymi psami, idealnymi do aktywności na świeżym powietrzu."
     },
     {
-    "breed": "eurasier",
-    "text": "The Eurasier is a breed with a calm and balanced character. They are loyal to their owners and form strong attachments to them."
+        "breed": "eurasier",
+        "text": "Eurasier to rasa o spokojnym i zrównoważonym charakterze. Są lojalne wobec swoich właścicieli i tworzą z nimi silne więzi."
     },
     {
-    "breed": "golden retriever",
-    "text": "Golden Retrievers are known for their friendly and gentle nature. They are also very intelligent and easy to train, making them popular family and companion dogs."
+        "breed": "golden retriever",
+        "text": "Golden Retrievery są znane ze swojego przyjaznego i łagodnego usposobienia. Są również bardzo inteligentne i łatwe do szkolenia, co czyni je popularnymi psami rodzinnymi i towarzyszącymi."
     },
     {
-    "breed": "husky syberyjski",
-    "text": "Siberian Huskies are sled dogs known for their energy, endurance, and unique appearance. They have a double coat that helps them survive in harsh climatic conditions."
+        "breed": "husky syberyjski",
+        "text": "Syberyjskie husky to psy zaprzęgowe znane ze swojej energii, wytrzymałości i unikalnego wyglądu. Mają podwójną sierść, która pomaga im przetrwać w trudnych warunkach klimatycznych."
     },
     {
-    "breed": "maltanski",
-    "text": "Maltese are small companion dogs known for their long, silky coat. They are also very active and attached to their owners."
+        "breed": "maltanski",
+        "text": "Maltańczyki to małe psy towarzyszące znane ze swojej długiej, jedwabistej sierści. Są również bardzo aktywne i przywiązane do swoich właścicieli."
     },
     {
-    "breed": "owczarek austarlijski",
-    "text": "Australian Shepherds are herding dogs known for their intelligence, energy, and loyalty to their family."
+        "breed": "owczarek austarlijski",
+        "text": "Owczarki australijskie to psy pasterskie znane ze swojej inteligencji, energii i lojalności wobec rodziny."
     },
     {
-    "breed": "owczarek niemiecki",
-    "text": "German Shepherds are one of the most popular dog breeds in the world. They are known for their intelligence, loyalty, and versatility, making them excellent working, family, and companion dogs."
+        "breed": "owczarek niemiecki",
+        "text": "Owczarki niemieckie to jedna z najpopularniejszych ras psów na świecie. Są znane ze swojej inteligencji, lojalności i wszechstronności, co czyni je doskonałymi psami pracującymi, rodzinnymi i towarzyszącymi."
     },
     {
-    "breed": "szpic wilczy",
-    "text": "The German Spitz, also known as the Wolfspitz, is a breed with a long history. They are energetic, intelligent dogs that require regular physical and mental activity."
+        "breed": "szpic wilczy",
+        "text": "Szpic wilczy, znany również jako Wolfspitz, to rasa o długiej historii. Są energicznymi, inteligentnymi psami, które wymagają regularnej aktywności fizycznej i umysłowej."
     },
     {
-    "breed": "terier",
-    "text": "Terriers are a diverse group of dogs characterized by courage, liveliness, and determination. There are many different terrier breeds, each with its own unique characteristics and personality."
+        "breed": "terier",
+        "text": "Teriery to różnorodna grupa psów charakteryzująca się odwagą, żywiołowością i determinacją. Istnieje wiele różnych ras terierów, z których każda ma swoje unikalne cechy i osobowość."
     }
-    ]
+]
