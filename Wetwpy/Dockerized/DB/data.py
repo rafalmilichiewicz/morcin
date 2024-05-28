@@ -8,7 +8,7 @@ folder_path = "images/"
 
 # Pobieranie zmiennych środowiskowych dla konfiguracji bazy danych
 db_host = os.getenv('DB_HOST', 'db')
-db_port = os.getenv('DB_PORT', '3307')  # Adjust the port if needed
+db_port = os.getenv('DB_PORT', '3306')  # Adjust the port if needed
 add_dog_url = f"http://{db_host}:{db_port}/dogs"
 
 # Establishing connection to MySQL database

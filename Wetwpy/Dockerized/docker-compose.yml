@@ -19,9 +19,10 @@ services:
     networks:
       - my_network
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-p", "password" ]
-      retries: 3
+      test: ["CMD", "mysqladmin", "ping", "-p", "password"]
+      retries: 2
       timeout: 5s
+
 
   dogs_microservice:
     container_name: dogs_microservice
