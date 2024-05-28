@@ -46,7 +46,7 @@ To install this software and be able to run it, you need to install Docker on yo
 
 ### Installing the Application 
 
-After you clone the repository, you need to run the terminal and go to the directory `\Wetwpy\Dockerized`, which contains all the files.
+After you clone the repository, you need to run the terminal and go to the directory `\Dockerized`, which contains all the files.
 
 Next, you need to set up the application by building the container.
 
