@@ -3,14 +3,18 @@ import mysql.connector
 
 app = Flask(__name__)
 
-@app.route('/dogs', methods=['GET'])
-def get_dogs():
-    conn = mysql.connector.connect(
+def get_db_connection():
+    return mysql.connector.connect(
         host="db",
+        port=3307,
         user="root",
         password="password",
         database="dogs_db"
     )
+
+@app.route('/dogs', methods=['GET'])
+def get_dogs():
+    conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM dogs")
     results = cursor.fetchall()
@@ -21,12 +25,7 @@ def get_dogs():
 @app.route('/dogs', methods=['POST'])
 def add_dog():
     data = request.json
-    conn = mysql.connector.connect(
-        host="db",
-        user="root",
-        password="password",
-        database="dogs_db"
-    )
+    conn = get_db_connection()
     cursor = conn.cursor()
     insert_query = "INSERT INTO dogs (breed, image, curiosity) VALUES (%s, %s, %s)"
     cursor.execute(insert_query, (data['breed'], bytes.fromhex(data['image']), data['curiosity']))
@@ -36,12 +35,7 @@ def add_dog():
 
 @app.route('/dogs/<breed>', methods=['DELETE'])
 def delete_dog(breed):
-    conn = mysql.connector.connect(
-        host="db",
-        user="root",
-        password="password",
-        database="dogs_db"
-    )
+    conn = get_db_connection()
     cursor = conn.cursor()
     delete_query = "DELETE FROM dogs WHERE breed = %s"
     cursor.execute(delete_query, (breed,))

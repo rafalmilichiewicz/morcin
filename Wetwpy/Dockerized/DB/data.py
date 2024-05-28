@@ -1,16 +1,25 @@
 import os
 import json
 import requests
+import mysql.connector
 
 # Ścieżka do folderu z obrazami
 folder_path = "images/"
 
 # Pobieranie zmiennych środowiskowych dla konfiguracji bazy danych
-db_host = os.getenv('DB_HOST', 'localhost')
-db_port = os.getenv('DB_PORT', '5000')
-
-# URL do dodawania psów
+db_host = os.getenv('DB_HOST', 'db')
+db_port = os.getenv('DB_PORT', '3307')  # Adjust the port if needed
 add_dog_url = f"http://{db_host}:{db_port}/dogs"
+
+# Establishing connection to MySQL database
+conn = mysql.connector.connect(
+    host=db_host,
+    port=db_port,
+    user='root',  # Adjust if needed
+    password='password',  # Adjust if needed
+    database='dogs_db'  # Adjust if needed
+)
+cursor = conn.cursor()
 
 try:
     # Iteracja przez pliki w folderze
@@ -44,3 +53,6 @@ try:
                         print(f"Błąd podczas dodawania do bazy danych: {response.text}")
 except Exception as e:
     print(f"Error: {e}")
+finally:
+    # Closing the connection
+    conn.close()
