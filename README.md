@@ -21,11 +21,11 @@ Project features include:
 
 This project was made with:
 
-- ![Docker](images/docker.png) **Docker**: 26.1.1
-- ![MySQL](images/mysql.png) **MySQL**: 8.3.0
-- ![Python](images/python.png) **Python**: 3.9
-- ![Flask](images/flask.png) **Flask**: 3.0.3
-- ![Streamlit](images/streamlit.png) **Streamlit**: 1.33.0
+- ![Docker](images/docker.jpg) **Docker**: 26.1.1
+- ![MySQL](images/mysql.jpg) **MySQL**: 8.3.0
+- ![Python](images/python.jpg) **Python**: 3.9
+- ![Flask](images/flask.jpg) **Flask**: 3.0.3
+- ![Streamlit](images/streamlit.jpg) **Streamlit**: 1.33.0
 
 ## Microservices Description
 
@@ -55,3 +55,4 @@ docker compose up -d
 ```
 
 
+## Visual Presentation
