@@ -19,7 +19,7 @@ def discover_dog():
             selected_dog = next((dog for dog in dogs if dog['breed'] == selected_dog_name), None)
 
             if selected_dog:
-                image_data = bytes.fromhex(selected_dog['image'])
+                image_data = bytes.fromhex(selected_dog['obrazek'])
                 image = Image.open(BytesIO(image_data))
 
                 st.image(image, width=300)

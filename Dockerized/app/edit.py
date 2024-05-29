@@ -29,7 +29,7 @@ def edit_dog():
                     payload = {
                         'breed': breed,
                         'curiosity': curiosity,
-                        'image': image_data.hex()  # Convert to hex string
+                        'obrazek': image_data.hex()  # Convert to hex string
                     }
                     response = requests.post('http://dogs_microservice:5000/dogs', json=payload)
 

@@ -5,6 +5,6 @@ USE dogs_db
 CREATE TABLE IF NOT EXISTS dogs(
     id INT AUTO_INCREMENT PRIMARY KEY,
     breed VARCHAR(100) NOT NULL,
-    curiosity TEXT NOT NULL,
-    image BLOB NOT NULL
+    curiosity VARCHAR(100) NOT NULL,
+    obrazek BLOB(65535) NOT NULL
 );
