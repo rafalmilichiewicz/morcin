@@ -3,7 +3,9 @@ version: '3.9'
 services:
   db:
     container_name: mysql-dogs-db
-    build: ./DB
+    build: 
+      context: /DB
+      dockerfile: dockerfile
     image: mysql:8.4.0
     environment:
       - MYSQL_ROOT_PASSWORD=password
