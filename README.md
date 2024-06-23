@@ -42,7 +42,15 @@ streamlit run app.py
 
 
 ## Visual Presentation
- (images/appscreens/mainpage.png) **Main Page**
- (images/appscreens/detection.png) **Main Page**
- (images/appscreens/discover.png) **Main Page**
- (images/appscreens/edit.png) **Main Page**
+![Main Page](images/appscreens/mainpage.png)
+**Main Page**
+
+![Detection dogs breed](images/appscreens/detection.png)
+**Detection dogs breed**
+
+![Discover dog](images/appscreens/discover.png)
+**Discover dog**
+
+![Edit dog info](images/appscreens/edit.png)
+**Edit dog info**
+
