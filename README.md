@@ -28,7 +28,7 @@ This project was made with:
 
 ### Prerequisites
 
-To install this software and be able to run it, you need to install packages from requirements.txt
+To install this software and be able to run it, you need to install packages from requirements.txt and run mysql server
 
 ### Installing the Application 
 
