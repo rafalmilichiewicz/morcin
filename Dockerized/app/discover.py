@@ -1,42 +1,46 @@
 import streamlit as st
-import requests
+import mysql.connector
 from PIL import Image
 from io import BytesIO
-import time
+from db.data import example_dogs
 
 def discover_dog():
-    retries = 5
-    for attempt in range(retries):
-        try:
-            response = requests.get('http://dogs_microservice:5000/dogs')
-            response.raise_for_status()
-            dogs = response.json()
+    # Open a new connection
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="password",  # Replace with your actual password
+        database="dogs_db"
+    )
+    cursor = conn.cursor()
+    # Execute query to fetch all dogs
+    select_query = "SELECT * FROM dogs"
+    cursor.execute(select_query)
+    results = cursor.fetchall()
+    if not results:
+        if st.button("Dodaj przykładowe psiaki"):
+            example_dogs()
+            st.rerun()
+    else:
 
-            dog_names = [dog['breed'] for dog in dogs]
 
-            selected_dog_name = st.selectbox("Select a dog", dog_names)
+        # List to store dog names
+        dog_names = [result[1] for result in results]
 
-            selected_dog = next((dog for dog in dogs if dog['breed'] == selected_dog_name), None)
+        # Select a dog from dropdown
+        selected_dog_name = st.selectbox("Select a dog", dog_names)
 
-            if selected_dog:
-                image_data = bytes.fromhex(selected_dog['obrazek'])
-                image = Image.open(BytesIO(image_data))
+        # Fetch information about the selected dog
+        selected_dog = [result for result in results if result[1] == selected_dog_name][0]
 
-                st.image(image, width=300)
-                st.header("Dog Information")
-                st.markdown("---")
-                st.write("**Breed:**", selected_dog['breed'])
-                st.write("**Curiosity:**", selected_dog['curiosity'])
-            else:
-                st.error("Dog not found. Please select a valid dog.")
-            break  # If successful, break out of retry loop
-        except requests.RequestException as e:
-            if attempt < retries - 1:
-                st.warning(f"Error fetching data: {e}. Retrying...")
-                time.sleep(2)  # Wait for 2 seconds before retrying
-            else:
-                st.error(f"Max retries exceeded: {e}")
+        # Display the image
+        st.image(selected_dog[2], width=300)  # Resize image width
+    
+        # Display dog information
+        st.header("Dog Information")
+        st.markdown("---")  # Separator
+        st.write("**Breed:**", selected_dog[1])
+        st.write("**Curiosity:**", selected_dog[3])
 
-if __name__ == "__main__":
-    st.title("Discover a Dog")
-    discover_dog()
+    # Close connection
+    conn.close()
