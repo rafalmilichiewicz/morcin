@@ -73,7 +73,30 @@ streamlit run app.py
   <strong>Edit dog info</strong>
 </div>
 
-## machine-learning-content
+## Introduction to Machine Learning Content
+
+Projekt został
+Jeżeli chce się ponownie wytrenować model z większą ilością epok lub zmienić jego ustawienia należy zainstalować nvidia cuda 12.1
+Name: torch
+Version: 2.2.2
+(myenv) C:\Users\Admin>conda list | grep torch
+pytorch                   2.2.2           py3.9_cuda12.1_cudnn8_0    pytorch
+pytorch-cuda              12.1                 hde6ce7c_5    pytorch
+pytorch-mutex             1.0                        cuda    pytorch
+torchaudio                2.2.2                    pypi_0    pypi
+torchvision               0.17.2                   pypi_0    pypi
+
+pozostałe pakiety są w requirements.txt w sekcji ML
+Należy zainstalować 
+Projekt został zaprojektowany przy użyciu Restnet50 wraz z optimizerem Adam.
+Tutaj mamy pokazaną miarę top-3
+
+Opisać te miary i jak się je liczy 
+
+metryke ogólnie 
+porównanie dla przykładowych obrazków - policzyć np dla 3 obrazków i dać wyniki.
+
+Opisać fragmenty kodu.
 
 <div align="center">
   <img src="Dockerized/app/model/plots/training_history.png" alt="Training History" /><br />
