@@ -75,6 +75,8 @@ streamlit run app.py
 
 ## Introduction to Machine Learning Content
 
+Pamiętaj o opisaniu skąd jest pobierany zbiór danych i opisanie zbioru danych
+
 Projekt został
 Jeżeli chce się ponownie wytrenować model z większą ilością epok lub zmienić jego ustawienia należy zainstalować nvidia cuda 12.1
 Name: torch
