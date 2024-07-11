@@ -1,16 +1,21 @@
 # Dogs Identifier
 
-## Table of Contents
+### Streamlit Content
 1. [Introduction](#introduction)
 2. [Technologies](#technologies)
-3. [Microservices Description](#microservices-description)
-4. [Setup Guide](#setup-guide)
-5. [Visual Presentation](#visual-presentation)
+3. [Setup Guide](#setup-guide)
+4. [Visual Presentation](#visual-presentation)
+
+### ML Content
+5. [Introduction to Machine Learning Content](#machine-learning-content)
+6. [ML Technologies](#machine-learning-technologies)
+7. [ML metrics](#machine-learning-metrics)
+8. [ML description](#machine-learning-description)
 
 ## Introduction
-This project is designed for learning how to use Docker.
+This project is designed for learning ML and streamlit.
 
-The result of this project is a set of microservices communicating with each other, consisting of a machine learning module, database, and a visual interface in the form of a web app.
+The result of this project is a web app consisting of a machine learning module, database, and a visual interface.
 
 Project features include:
 - Detecting dog breeds using photos.
@@ -21,38 +26,38 @@ Project features include:
 
 This project was made with:
 
-- ![Docker](images/docker.png) **Docker**: 26.1.1
 - ![MySQL](images/mysql.png) **MySQL**: 8.3.0
 - ![Python](images/python.png) **Python**: 3.9
-- ![Flask](images/flask.png) **Flask**: 3.0.3
 - ![Streamlit](images/streamlit.png) **Streamlit**: 1.33.0
 
-## Microservices Description
-
-### Database Server
-This service is responsible for providing the database. It is based on MySQL server.
-
-### UI
-This service is responsible for the visual interface of the application. It allows users to use the functionalities of the app. It is based on Streamlit.
-
-### Flask
-This service is responsible for communicating between the database and UI. It is based on Flask.
-
-## Setup Guide
+## Setup guide
 
 ### Prerequisites
 
-To install this software and be able to run it, you need to install Docker on your machine. If you don't have Docker, you can download it from the [official distribution](https://www.docker.com/).
+To install this software and be able to run it, you need to install packages from requirements.txt and run mysql server
 
 ### Installing the Application 
 
-After you clone the repository, you need to run the terminal and go to the directory `\Dockerized`, which contains all the files.
-
-Next, you need to set up the application by building the container.
+After you clone the repository, you need to run the terminal and go to the directory `\Dockerized\app`, which contains all the files.
 
 ```bash
-docker compose up -d
+streamlit run app.py
 ```
 
 
 ## Visual Presentation
+![Main Page](images/appscreens/mainpage.png)
+**Main Page**
+
+![Detection dogs breed](images/appscreens/detection.png)
+**Detection dogs breed**
+
+![Discover dog](images/appscreens/discover.png)
+**Discover dog**
+
+![Edit dog info](images/appscreens/edit.png)
+**Edit dog info**
+
+## machine-learning-content
+
+![Training History](Dockerized/app/model/plots/training_history.png)
