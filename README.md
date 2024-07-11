@@ -46,18 +46,36 @@ streamlit run app.py
 
 
 ## Visual Presentation
-![Main Page](images/appscreens/mainpage.png)
-**Main Page**
 
-![Detection dogs breed](images/appscreens/detection.png)
-**Detection dogs breed**
+<div align="center">
+  <img src="images/appscreens/mainpage.png" alt="Main Page" /><br />
+  <strong>Main Page</strong>
+</div>
 
-![Discover dog](images/appscreens/discover.png)
-**Discover dog**
+<br />
 
-![Edit dog info](images/appscreens/edit.png)
-**Edit dog info**
+<div align="center">
+  <img src="images/appscreens/detection.png" alt="Detection dogs breed" /><br />
+  <strong>Detection dogs breed</strong>
+</div>
+
+<br />
+
+<div align="center">
+  <img src="images/appscreens/discover.png" alt="Discover dog" /><br />
+  <strong>Discover dog</strong>
+</div>
+
+<br />
+
+<div align="center">
+  <img src="images/appscreens/edit.png" alt="Edit dog info" /><br />
+  <strong>Edit dog info</strong>
+</div>
 
 ## machine-learning-content
 
-![Training History](Dockerized/app/model/plots/training_history.png)
+<div align="center">
+  <img src="Dockerized/app/model/plots/training_history.png" alt="Training History" /><br />
+  <strong>Training History</strong>
+</div>

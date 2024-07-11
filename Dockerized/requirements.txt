@@ -1,3 +1,8 @@
 streamlit
 mysql-connector-python
 Pillow
+scikit-learn
+numpy
+matplotlib
+tqdm
+torch torchvision
