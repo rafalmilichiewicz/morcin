@@ -10,12 +10,15 @@
 5. [Introduction to Machine Learning Content](#introduction-to-machine-learning-content)
 6. [Machine Learning Technologies](#machine-learning-technologies)
 7. [Machine Learning Setup Guide](#machine-learning-setup-guide)
-8. [Dataset Description](#dataset-description)
-9. [Machine Learning Metrics](#machine-learning-metrics) 
-   - [Training History](#training-history)
-10. [Machine Learning Examples](#machine-learning-examples)
-11. [Future Development Plan](#future-development-plans)
-12. [Machine Learning Description](#machine-learning-description)
+8. [ResNet50 and Adam optimizer](#resnet50-and-adam-optimizer)
+    - [ResNet50](#resnet50)
+    - [Adam optimizer](#adam-optimizer)
+9. [Dataset Description](#dataset-description)
+10. [Machine Learning Metrics](#machine-learning-metrics) 
+    - [Training History](#training-history)
+11. [Machine Learning Examples](#machine-learning-examples)
+12. [Future Development Plan](#future-development-plans)
+13. [Machine Learning Description](#machine-learning-description)
 
 ## Introduction
 This project is designed for learning ML and streamlit.
@@ -30,10 +33,10 @@ Project features include:
 ## Technologies
 
 This project was made with:
+- <img src="images/mysql.png" width="50" height="50" style="vertical-align: middle;">&nbsp;**MySQL**: 8.3.0
+- <img src="images/python.png" width="50" height="50" style="vertical-align: middle;">&nbsp;**Python**: 3.9
+- <img src="images/streamlit.png" width="50" height="50" style="vertical-align: middle;">&nbsp;**Streamlit**: 1.33.0
 
-- ![MySQL](images/mysql.png) **MySQL**: 8.3.0
-- ![Python](images/python.png) **Python**: 3.9
-- ![Streamlit](images/streamlit.png) **Streamlit**: 1.33.0
 
 ## Setup guide
 
@@ -43,7 +46,7 @@ To install this software and be able to run it, you need to install packages fro
 
 ### Installing the Application 
 
-After you clone the repository, you need to run the terminal and go to the directory `\Dockerized\app`, which contains all the files.
+After you clone the repository, you need to run the terminal and go to the directory `\Dockerized\app`, which contains all the files and run this command:
 
 ```bash
 streamlit run app.py
@@ -82,10 +85,44 @@ streamlit run app.py
 This section of the documentation explains how Machine Learning (ML) system works. The primary purpose of this ML model is to detect dog breeds from photos uploaded by users through a Streamlit app.
 
 ## Machine Learning Technologies 
-The project is based on:
-- ![PyTorch](images/pytorch2.png) **PyTorch**: 2.3.1
+Model was created using:
+- <img src="images/pytorch.png" width="50" height="50" style="vertical-align: middle;">&nbsp;**PyTorch**: 2.3.1
 
-For visual detection, we have used the ResNet50 architecture with the Adam optimizer.
+For visual detection, project uses the ResNet50 architecture with the Adam optimizer.
+## ResNet50 and Adam optimizer
+
+### ResNet50
+ResNet50, or Residual Network with 50 layers, is a popular deep neural network architecture designed for image recognition. It was introduced by Kaiming He and his colleagues in 2015. The primary innovation in ResNet is the use of "residual blocks," which allow for the construction of very deep networks without the problem of vanishing gradients, a major challenge in traditional deep neural networks.
+
+### Key Features of ResNet50:
+1. **Residual Blocks**: These blocks consist of several layers, with an additional "shortcut" connection that bypasses one or more layers, allowing for more effective training of very deep networks.
+2. **Depth**: ResNet50 has 50 layers, making it a deep network capable of learning complex features from input data.
+3. **Performance**: It has been shown to achieve state-of-the-art results in various image recognition tasks, including winning the ImageNet Large Scale Visual Recognition Challenge (ILSVRC) in 2015.
+4. **Applications**: ResNet50 is widely used in computer vision tasks such as image classification, object detection, and image segmentation.
+
+ResNet50's architecture can be visualized as a series of residual blocks, each containing convolutional layers, batch normalization, and ReLU activation functions, interspersed with shortcut connections.
+
+
+<div align="center">
+  <img src="images/Restnetarch.png" alt="Resnet50" /><br />
+  <strong>Resnet50 architecture</strong>
+</div>
+
+### Adam optimizer
+
+The Adam optimizer, which stands for Adaptive Moment Estimation, is an algorithm for gradient-based optimization of stochastic objective functions. It was introduced by Diederik P. Kingma and Jimmy Ba in 2014. Adam combines the advantages of two other popular optimization methods: Adaptive Gradient Algorithm (AdaGrad) and Root Mean Square Propagation (RMSProp).
+
+### Key Features of Adam Optimizer:
+1. **Adaptive Learning Rates**: Adam computes individual adaptive learning rates for different parameters from estimates of first and second moments of the gradients.
+2. **Efficient Computation**: It requires relatively low memory and is computationally efficient, making it well-suited for large datasets and high-dimensional parameter spaces.
+3. **Bias Correction**: The algorithm includes bias-correction mechanisms to account for the initialization of moment estimates, which can improve performance in the early stages of training.
+4. **Parameters**:
+    - **Learning Rate (\(\alpha\))**: Typically set to 0.001 by default.
+    - **Beta1 (\(\beta_1\))**: The exponential decay rate for the first moment estimates, usually set to 0.9.
+    - **Beta2 (\(\beta_2\))**: The exponential decay rate for the second moment estimates, usually set to 0.999.
+    - **Epsilon (\(\epsilon\))**: A small constant to prevent division by zero, typically set to \(10^{-8}\).
+
+Adam is widely used in training deep learning models due to its efficiency and effectiveness.
 ## Machine Learning Setup Guide
 To run the ML model, follow these steps:
 1. **Download and Install CUDA Drivers and NVIDIA Toolkit** First, download and install the CUDA drivers version 12.1 and the NVIDIA Toolkit. You can download them from the following link: [CUDA 12.1.0 Download Archive](https://developer.nvidia.com/cuda-12-1-0-download-archive)
