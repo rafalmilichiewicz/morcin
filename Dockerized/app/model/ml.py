@@ -119,60 +119,73 @@ def build_model(num_classes):
 # Step 6: Train the Model
 def train_model(model, train_loader, val_loader, num_epochs=20):
     print("Starting training...")
-    criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.fc.parameters(), lr=0.001)
     
-    best_val_loss = float('inf')
-    history = {'train_loss': [], 'val_loss': [], 'train_acc': [], 'val_acc': []}
+    # Define loss function and optimizer
+    criterion = nn.CrossEntropyLoss()  # Cross-entropy loss for classification
+    optimizer = optim.Adam(model.fc.parameters(), lr=0.001)  # Adam optimizer for training
     
+    # Initialize variables to track best validation loss and history of metrics
+    best_val_loss = float('inf')  # Track the best validation loss
+    history = {'train_loss': [], 'val_loss': [], 'train_acc': [], 'val_acc': []}  # Dictionary to store training history
+    
+    # Loop through epochs
     for epoch in range(num_epochs):
-        model.train()
-        running_loss = 0.0
-        correct = 0
-        total = 0
+        model.train()  # Set model to training mode
+        running_loss = 0.0  # Initialize running loss
+        correct = 0  # Initialize correct predictions counter
+        total = 0  # Initialize total samples counter
+        
+        # Iterate over training dataset
         for inputs, labels in tqdm(train_loader, desc=f"Training Epoch {epoch+1}/{num_epochs}"):
-            inputs, labels = inputs.to(device), labels.to(device)
-            optimizer.zero_grad()
-            outputs = model(inputs)
-            loss = criterion(outputs, labels)
-            loss.backward()
-            optimizer.step()
+            inputs, labels = inputs.to(device), labels.to(device)  # Move inputs and labels to GPU if available
+            optimizer.zero_grad()  # Zero the parameter gradients
+            outputs = model(inputs)  # Forward pass
+            loss = criterion(outputs, labels)  # Calculate the loss
+            loss.backward()  # Backward pass
+            optimizer.step()  # Update weights
             
-            running_loss += loss.item() * inputs.size(0)
-            _, predicted = torch.topk(outputs, 3, dim=1)
-            total += labels.size(0)
-            correct += sum([labels[i].item() in predicted[i].tolist() for i in range(labels.size(0))])
+            # Update statistics
+            running_loss += loss.item() * inputs.size(0)  # Accumulate running loss
+            _, predicted = torch.topk(outputs, 3, dim=1)  # Get top-3 predictions
+            total += labels.size(0)  # Increment total count by batch size
+            correct += sum([labels[i].item() in predicted[i].tolist() for i in range(labels.size(0))])  # Count correct predictions
         
-        epoch_loss = running_loss / len(train_loader.dataset)
-        epoch_acc = correct / total
-        history['train_loss'].append(epoch_loss)
-        history['train_acc'].append(epoch_acc)
+        # Calculate epoch training loss and accuracy
+        epoch_loss = running_loss / len(train_loader.dataset)  # Average training loss
+        epoch_acc = correct / total  # Training accuracy
+        history['train_loss'].append(epoch_loss)  # Append training loss to history
+        history['train_acc'].append(epoch_acc)  # Append training accuracy to history
         
-        model.eval()
-        val_loss = 0.0
-        correct = 0
-        total = 0
+        model.eval()  # Set model to evaluation mode
+        val_loss = 0.0  # Initialize validation loss
+        correct = 0  # Initialize correct predictions counter
+        total = 0  # Initialize total samples counter
+        
+        # Validate the model
         with torch.no_grad():
             for inputs, labels in tqdm(val_loader, desc=f"Validating Epoch {epoch+1}/{num_epochs}"):
-                inputs, labels = inputs.to(device), labels.to(device)
-                outputs = model(inputs)
-                loss = criterion(outputs, labels)
-                val_loss += loss.item() * inputs.size(0)
-                _, predicted = torch.topk(outputs, 3, dim=1)
-                total += labels.size(0)
-                correct += sum([labels[i].item() in predicted[i].tolist() for i in range(labels.size(0))])
+                inputs, labels = inputs.to(device), labels.to(device)  # Move inputs and labels to GPU if available
+                outputs = model(inputs)  # Forward pass
+                loss = criterion(outputs, labels)  # Calculate the loss
+                val_loss += loss.item() * inputs.size(0)  # Accumulate validation loss
+                _, predicted = torch.topk(outputs, 3, dim=1)  # Get top-3 predictions
+                total += labels.size(0)  # Increment total count by batch size
+                correct += sum([labels[i].item() in predicted[i].tolist() for i in range(labels.size(0))])  # Count correct predictions
         
-        val_loss /= len(val_loader.dataset)
-        val_acc = correct / total
-        history['val_loss'].append(val_loss)
-        history['val_acc'].append(val_acc)
+        # Calculate epoch validation loss and accuracy
+        val_loss /= len(val_loader.dataset)  # Average validation loss
+        val_acc = correct / total  # Validation accuracy
+        history['val_loss'].append(val_loss)  # Append validation loss to history
+        history['val_acc'].append(val_acc)  # Append validation accuracy to history
         
+        # Print epoch statistics
         print(f"Epoch [{epoch+1}/{num_epochs}] Train Loss: {epoch_loss:.4f}, Train Acc: {epoch_acc:.4f}, Val Loss: {val_loss:.4f}, Val Acc: {val_acc:.4f}")
 
-        # Save the best model
+        # Save the best model based on validation loss
         if val_loss < best_val_loss:
             best_val_loss = val_loss
-            torch.save(model.state_dict(), 'best_model.pth')
+            torch.save(model.state_dict(), 'best_model.pth')  # Save model parameters to 'best_model.pth'
+
 
     # Save class indices
     class_indices = train_loader.dataset.class_to_idx
@@ -188,30 +201,52 @@ def train_model(model, train_loader, val_loader, num_epochs=20):
 
 # Step 7: Predict the Breed of a New Image
 def predict_breed(model, img_path):
+    # Print the path of the image we're predicting
     print(f"Predicting breed for image: {img_path}")
+    
+    # Define a series of image transformations to prepare the image for the model
     transform = transforms.Compose([
-        transforms.Resize(256),
-        transforms.CenterCrop(224),
-        transforms.ToTensor(),
-        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+        transforms.Resize(256),         # Resize the image to 256x256 pixels
+        transforms.CenterCrop(224),     # Crop the center 224x224 pixels of the image
+        transforms.ToTensor(),          # Convert the image to a PyTorch tensor
+        transforms.Normalize(           # Normalize the image with specific mean and standard deviation
+            [0.485, 0.456, 0.406],      # Mean for each channel (RGB)
+            [0.229, 0.224, 0.225]       # Standard deviation for each channel (RGB)
+        )
     ])
+    
+    # Open the image from the provided path and convert it to RGB mode
     image = Image.open(img_path).convert("RGB")
-    image = transform(image).unsqueeze(0).to(device)
+    # Apply the defined transformations to the image and prepare it for the model
+    image = transform(image).unsqueeze(0).to(device)  # Add an extra dimension (batch dimension) and move it to the specified device
 
+    # Set the model to evaluation mode
     model.eval()
+    
+    # Disable gradient computation because we are in inference mode
     with torch.no_grad():
+        # Forward pass the transformed image through the model
         outputs = model(image)
-        probabilities, predicted_indices = torch.topk(torch.softmax(outputs, dim=1), 3)
+        # Compute softmax probabilities over the output
+        probabilities, predicted_indices = torch.topk(torch.softmax(outputs, dim=1), 3)  # Get top 3 predictions and their probabilities
 
+    # Load the class indices mapping from a file (presumably created during training)
     with open('class_indices.npy', 'rb') as f:
         class_indices = np.load(f, allow_pickle=True).item()
+    
+    # Invert the dictionary to map indices to class labels
     class_labels = {v: k for k, v in class_indices.items()}
 
+    # Create a list of top 3 predictions with their corresponding probabilities
     top3_predictions = [(class_labels[idx.item()], prob.item()) for idx, prob in zip(predicted_indices[0], probabilities[0])]
+    
+    # Print each predicted breed and its probability
     for breed, prob in top3_predictions:
         print(f"Predicted breed: {breed}, Probability: {prob:.4f}")
 
+    # Return the top 3 predictions as a list of tuples (breed, probability)
     return top3_predictions
+
 
 def plot_training_history():
     print("Plotting training history...")

@@ -19,6 +19,12 @@
 11. [Machine Learning Examples](#machine-learning-examples)
 12. [Future Development Plan](#future-development-plans)
 13. [Machine Learning Description](#machine-learning-description)
+    - [Step 1](#step-1)
+    - [Step 2](#step-2)
+    - [Step 3](#step-3)
+    - [Step 4](#step-4)
+    - [Step 5](#step-5)
+    - [Step 6 and more](#step-6-and-more)
 
 ## Introduction
 This project is designed for learning ML and streamlit.
@@ -117,10 +123,10 @@ The Adam optimizer, which stands for Adaptive Moment Estimation, is an algorithm
 2. **Efficient Computation**: It requires relatively low memory and is computationally efficient, making it well-suited for large datasets and high-dimensional parameter spaces.
 3. **Bias Correction**: The algorithm includes bias-correction mechanisms to account for the initialization of moment estimates, which can improve performance in the early stages of training.
 4. **Parameters**:
-    - **Learning Rate (\(\alpha\))**: Typically set to 0.001 by default.
-    - **Beta1 (\(\beta_1\))**: The exponential decay rate for the first moment estimates, usually set to 0.9.
-    - **Beta2 (\(\beta_2\))**: The exponential decay rate for the second moment estimates, usually set to 0.999.
-    - **Epsilon (\(\epsilon\))**: A small constant to prevent division by zero, typically set to \(10^{-8}\).
+    - **Learning Rate \($\alpha$)**: Typically set to 0.001 by default.
+    - **Beta1 ($\beta_1$)**: The exponential decay rate for the first moment estimates, usually set to 0.9.
+    - **Beta2 ($\beta_2$)**: The exponential decay rate for the second moment estimates, usually set to 0.999.
+    - **Epsilon ($\epsilon$)**: A small constant to prevent division by zero, typically set to \(10^{-8}\).
 
 Adam is widely used in training deep learning models due to its efficiency and effectiveness.
 ## Machine Learning Setup Guide
@@ -216,3 +222,54 @@ Formula: val_acc = correct / total
 ## Machine Learning Description
 Opisać fragmenty kodu.
 
+### Step 1:
+
+This download_and_extract_dataset function downloads a dataset file from a specified URL and extracts it into a designated directory. It first checks if the target directory exists; if not, it creates it. Then, it checks if the source file already exists, if not, it downloads it using urllib, and finally extracts the tar archive into the specified target directory.
+
+<div align="center">
+  <img src="images/codescreens/Step1.png" alt="Step 1" /><br />
+  <strong>Step 1</strong>
+</div>
+
+### Step 2:
+
+This Python function split_dataset takes an input directory containing subdirectories of breed-specific image folders, splits each breed's images into training and validation sets using an 80:20 ratio, and moves them into specified directories (train_dir and val_dir). It ensures directories for each breed are created if they do not exist and prints a confirmation message once the dataset is successfully split or indicates if the dataset is already split.
+
+<div align="center">
+  <img src="images/codescreens/Step2.png" alt="Step 2" /><br />
+  <strong>Step 2</strong>
+</div>
+
+### Step 3:
+
+
+The code defines a custom DogDataset class for loading a dataset of dog images stored in a directory structure, where each subdirectory represents a different class of dogs. It initializes by sorting and indexing the classes, then iterates through each class directory to collect image paths and corresponding labels. The __len__ method returns the total number of images, and __getitem__ loads an image from disk, applies optional transformations, and returns the image tensor along with its label.
+
+It effectively prepares a PyTorch dataset compatible with neural network training, facilitating image loading and preprocessing for classification tasks involving multiple dog breeds.
+
+<div align="center">
+  <img src="images/codescreens/Step3.png" alt="Step 3" /><br />
+  <strong>Step 3</strong>
+</div>
+
+### Step 4:
+
+This code snippet defines a function prepare_data_loaders that sets up data loaders for training and validation using PyTorch's DataLoader and transforms modules. It applies data augmentation to the training set with random resized crops and horizontal flips, followed by normalization. For the validation set, it applies resizing, center cropping, and the same normalization. The function creates instances of DogDataset for both training and validation directories, configures batch sizes, shuffling, and multiprocessing for efficient data loading, preparing the datasets for training a neural network model on dog image classification tasks.
+
+<div align="center">
+  <img src="images/codescreens/Step4.png" alt="Step 4" /><br />
+  <strong>Step 4</strong>
+</div>
+
+### Step 5:
+
+This code defines a function build_model that constructs a pretrained ResNet50 model with its fully connected layers modified for a specific number of output classes. The pretrained ResNet50's parameters are frozen, and two additional fully connected layers are appended to adapt the model for a new classification task, incorporating ReLU activation and dropout for regularization.
+
+<div align="center">
+  <img src="images/codescreens/Step4.png" alt="Step 5" /><br />
+  <strong>Step 5</strong>
+</div>
+
+### Step 6 and more:
+
+For the rest of steps click [here](Dockerized/app/model/ml.py)
