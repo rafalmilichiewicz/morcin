@@ -13,8 +13,9 @@
 8. [Dataset Description](#dataset-description)
 9. [Machine Learning Metrics](#machine-learning-metrics) 
    - [Training History](#training-history)
-10. [Machine Learning Examples](#machine-learning-examples) 
-11. [Machine Learning Description](#machine-learning-description)
+10. [Machine Learning Examples](#machine-learning-examples)
+11. [Future Development Plan](#future-development-plans)
+12. [Machine Learning Description](#machine-learning-description)
 
 ## Introduction
 This project is designed for learning ML and streamlit.
@@ -113,7 +114,7 @@ Description of dataset was copied from original site.
 
 ## Machine Learning Metrics
 
-Overall Metrics:
+### Overall Metrics:
 The best validation loss is tracked to save the best model.
 Metrics for each epoch (training loss, validation loss, training accuracy, and validation accuracy) are stored in the history dictionary [here](Dockerized/app/model/metrics/metrics.txt).
 
@@ -122,8 +123,8 @@ Metrics for each epoch (training loss, validation loss, training accuracy, and v
 - val_accuracy: 0.9699663623258049
 
 
-### Training History
-### 1. Training Phase Metrics:
+## Training History
+### Training Phase Metrics:
 Training Loss:
 
 For each batch of training data, the model computes the outputs and the corresponding loss using the CrossEntropyLoss criterion.
@@ -137,7 +138,7 @@ Correct predictions are those where the actual label is within the top-3 predict
 The number of correct predictions is divided by the total number of samples to get the accuracy.
 Formula: epoch_acc = correct / total
 
-### 2. Validation Phase Metrics:
+### Validation Phase Metrics:
 Validation Loss:
 
 Similar to training loss, the validation loss is computed for each batch and accumulated.
@@ -154,8 +155,27 @@ Formula: val_acc = correct / total
 </div>
 
 ## Machine Learning Examples
-PHOTO HERE
-porównanie dla przykładowych obrazków - policzyć np dla 3 obrazków i dać wyniki.
+<div align="center">
+  <img src="images/resultsscreens/Result1.png" alt="Result 1" /><br />
+  <strong>Result 1</strong>
+</div>
+
+<div align="center">
+  <img src="images/resultsscreens/Result2.png" alt="Result 2" /><br />
+  <strong>Result 2</strong>
+</div>
+
+<div align="center">
+  <img src="images/resultsscreens/Result3.png" alt="Result 3" /><br />
+  <strong>Result 3</strong>
+</div>
+
+## Future Development Plans 
+- Removing ID photo from results.
+- Adding photos to results.
+- Checking other models to find best results
+- Dockerizing the entire project.
+
 ## Machine Learning Description
 Opisać fragmenty kodu.
 
