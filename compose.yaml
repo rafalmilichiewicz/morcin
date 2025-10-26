@@ -1,0 +1,11 @@
+services:
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: dogs_db
+
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./.mysqlp:/var/lib/mysql

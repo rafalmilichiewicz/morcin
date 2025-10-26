@@ -1,1 +1,4 @@
 Dockerized/app/model/data/**
+.venv
+__pycache__
+.mysqlp
