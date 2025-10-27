@@ -4,13 +4,10 @@ from recognize import recognize_dog
 from discover import discover_dog
 from edit import edit_dog
 import mysql.connector
+from db.env import get_db_connection
 
 def main():
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="password",  # Replace with your actual password
-    )
+    conn = get_db_connection()
     mycursor = conn.cursor()
 
     # Execute each SQL statement separately

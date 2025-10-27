@@ -3,15 +3,10 @@ import mysql.connector
 from PIL import Image
 from io import BytesIO
 from db.data import example_dogs
-
+from db.env import get_db_connection
 def discover_dog():
     # Open a new connection
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="password",  # Replace with your actual password
-        database="dogs_db"
-    )
+    conn = get_db_connection()
     cursor = conn.cursor()
     # Execute query to fetch all dogs
     select_query = "SELECT * FROM dogs"

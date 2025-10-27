@@ -1,0 +1,48 @@
+services:
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: dogs_db
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      timeout: 5s
+      interval: 20s
+      start_period: 20s
+      retries: 10
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./.mysqlp:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "8080:80"
+
+  app:
+    build:
+      dockerfile: dockerfile
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=password
+      - DB_NAME=dogs_db
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail http://localhost:8501/_stcore/health
+      interval: 40s
+      timeout: 30s
+      retries: 3
+      start_period: 20s
+    ports:
+      - 8501:8501

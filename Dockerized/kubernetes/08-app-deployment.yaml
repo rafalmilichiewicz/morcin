@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        app: app
+    name: app
+    namespace: dockerized
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: app
+    strategy: {}
+    template:
+        metadata:
+            labels:
+                app: app
+        spec:
+            containers:
+                - image: python-app
+                  imagePullPolicy: Never
+                  name: python-app
+                  env:
+                      - name: DB_HOST
+                        valueFrom:
+                            configMapKeyRef:
+                                name: app-config
+                                key: DB_HOST
+                      - name: DB_USER
+                        valueFrom:
+                            configMapKeyRef:
+                                name: app-config
+                                key: DB_USER
+                      - name: DB_NAME
+                        valueFrom:
+                            configMapKeyRef:
+                                name: app-config
+                                key: DB_NAME
+                      - name: DB_PASSWORD
+                        valueFrom:
+                            secretKeyRef:
+                                name: mysql-root-pass
+                                key: MYSQL_ROOT_PASSWORD
+                  readinessProbe:
+                      httpGet:
+                          path: /_stcore/health
+                          port: 8501
+                      initialDelaySeconds: 20
+                      periodSeconds: 40
+                      timeoutSeconds: 30
+                      failureThreshold: 3
+                  livenessProbe:
+                      httpGet:
+                          path: /_stcore/health
+                          port: 8501
+                      initialDelaySeconds: 60
+                      periodSeconds: 60
+                      timeoutSeconds: 30
+                      failureThreshold: 3
+                  resources:
+                      requests:
+                          cpu: '0.5'
+                          memory: '750Mi'
+                      limits:
+                          cpu: '0.5'
+                          memory: '1Gi'
+status: {}

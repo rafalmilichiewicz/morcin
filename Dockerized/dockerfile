@@ -1,0 +1,16 @@
+FROM ghcr.io/astral-sh/uv:python3.13-trixie-slim
+WORKDIR /python-app
+
+# Initialize UV and download project requirements
+RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates
+COPY ./uv.lock ./uv.lock
+COPY ./pyproject.toml ./pyproject.toml
+RUN uv sync --locked
+
+# Copy project files and start server
+COPY . .
+WORKDIR /python-app/app
+EXPOSE 8501
+HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
+
+CMD ["uv", "run", "streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]

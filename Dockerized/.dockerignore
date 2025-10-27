@@ -1,0 +1,4 @@
+.venv/**
+.mysqlp/**
+__pycache__
+model/data/**

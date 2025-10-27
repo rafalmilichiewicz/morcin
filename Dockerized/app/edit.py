@@ -2,7 +2,7 @@ import streamlit as st
 import mysql.connector
 from PIL import Image
 from io import BytesIO
-
+from db.env import get_db_connection
 def edit_dog():
     st.title("Dodaj/usuń dane psiaka")
 
@@ -25,12 +25,7 @@ def edit_dog():
                 image_data = image_bytes.getvalue()
 
                 # Dodanie psa do bazy danych
-                conn = mysql.connector.connect(
-                    host="localhost",
-                    user="root",
-                    password="password",  # Ustaw swoje hasło
-                    database="dogs_db"
-                )
+                conn = get_db_connection()
                 cursor = conn.cursor()
                 insert_query = "INSERT INTO dogs (breed, image, curiosity) VALUES (%s, %s, %s)"
                 cursor.execute(insert_query, (breed, image_data, curiosity))
@@ -44,12 +39,7 @@ def edit_dog():
     elif add_or_remove == "Usuń psa":
         # Formularz usuwania psa
         st.header("Usuń psa")
-        conn = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="password",  # Ustaw swoje hasło
-            database="dogs_db"
-        )
+        conn = get_db_connection()
         cursor = conn.cursor()
         select_query = "SELECT * FROM dogs"
         cursor.execute(select_query)

@@ -1,7 +1,7 @@
 import os
 import json
 import mysql.connector
-
+from .env import get_db_connection
 def example_dogs():
     # Path to the folder with images
     folder_path = "db/images/"
@@ -11,12 +11,7 @@ def example_dogs():
         print(f"Error: Directory '{folder_path}' does not exist.")
         return
 
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="password",  # Replace with your actual password
-        database="dogs_db"
-    )
+    conn = get_db_connection()
     cursor = conn.cursor()
 
     try:

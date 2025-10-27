@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+    name: mysql
+    namespace: dockerized
+    labels:
+        app: mysql
+spec:
+    serviceName: mysql
+    updateStrategy:
+        type: RollingUpdate
+        rollingUpdate:
+            maxUnavailable: 1
+    replicas: 1
+    selector:
+        matchLabels:
+            app: mysql
+    template:
+        metadata:
+            labels:
+                app: mysql
+        spec:
+            containers:
+                - name: mysql
+                  image: mysql:9.5
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                      - containerPort: 3306
+                        name: mysql
+                  env:
+                      - name: MYSQL_ROOT_PASSWORD
+                        valueFrom:
+                            secretKeyRef:
+                                name: mysql-root-pass
+                                key: MYSQL_ROOT_PASSWORD
+                      - name: MYSQL_DATABASE
+                        valueFrom:
+                            configMapKeyRef:
+                                name: app-config
+                                key: DB_NAME
+                  readinessProbe:
+                      exec:
+                          command:
+                              - sh
+                              - -c
+                              - 'mysqladmin ping -h 127.0.0.1 -u root --password=$MYSQL_ROOT_PASSWORD'
+                      initialDelaySeconds: 20
+                      periodSeconds: 20
+                      timeoutSeconds: 5
+                      failureThreshold: 10
+                  livenessProbe:
+                      exec:
+                          command:
+                              - sh
+                              - -c
+                              - 'mysqladmin ping -h 127.0.0.1 -u root --password=$MYSQL_ROOT_PASSWORD'
+                      initialDelaySeconds: 60
+                      periodSeconds: 30
+                      timeoutSeconds: 5
+                      failureThreshold: 5
+                  volumeMounts:
+                      - name: mysql-data
+                        mountPath: /var/lib/mysql
+                  resources:
+                      requests:
+                          memory: '512Mi'
+                          cpu: '500m'
+                      limits:
+                          memory: '1Gi'
+                          cpu: '1'
+    volumeClaimTemplates:
+        - metadata:
+              name: mysql-data
+              annotations:
+                  volume.beta.kubernetes.io/storage-class: 'standard'
+          spec:
+              accessModes: ['ReadWriteOnce']
+              resources:
+                  requests:
+                      storage: 1Gi
