@@ -116,10 +116,12 @@ kubectl create ingress dockerized-ingress \
     -   MySQL 9.5 - Stateful Set with health checks
     -   PHP MyAdmin - 1 replica
     -   App - Python application with health checks from local docker image
+    -   Websocket - Python asyncio websocket app
 -   Services:
     -   MySQL - ClusterIP - restricted access
     -   PHP MyAdmin - LoadBalancer
     -   App - LoadBalancer
+    -   Websocket - LoadBalancer
 -   HorizontalPodAutoscaler
     -   Minimum: `1` replica
     -   Maximin: `3` replicas
@@ -143,6 +145,17 @@ minikube image load python-app.img
 ```
 
 Image upload process does not use normal `minikube image build` because of huge image size and memory constraints.
+
+## Building websocket app docker image
+
+Before deploying websocket app image needs to built and uploaded to. In `Dockerized/websocket` folder run following command
+
+```sh
+docker build -t websocket-app:latest .
+minikube image load websocket-app:latest
+```
+
+In this case image is relatively small and can be loaded into minikube without creating file first.
 
 ## Preparing Minikube
 
@@ -181,6 +194,7 @@ kubectl apply -f 07-phpmyadmin-svc.yaml
 kubectl apply -f 08-app-deployment.yaml
 kubectl apply -f 09-app-svc.yaml
 kubectl apply -f 10-app-hpa.yaml
+kubectl apply -f 10.5-websocket.yaml
 kubectl apply -f 11-ingress.yaml
 kubectl apply -f 12-network.yaml
 ```

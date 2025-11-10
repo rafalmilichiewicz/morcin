@@ -1,0 +1,8 @@
+###Główna biblioteka do obsługi serwera
+
+websockets
+
+###Biblioteki potrzebne do uruchomienia testów
+
+pytest
+pytest-asyncio

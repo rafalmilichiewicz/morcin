@@ -1,0 +1,15 @@
+FROM ghcr.io/astral-sh/uv:python3.13-trixie-slim
+WORKDIR /python-app
+
+# Initialize UV and download project requirements
+RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates
+COPY ./uv.lock ./uv.lock
+COPY ./pyproject.toml ./pyproject.toml
+RUN uv sync --locked
+
+# Copy project files and start server
+COPY . .
+WORKDIR /python-app
+EXPOSE 8765
+
+CMD ["uv", "run", "server.py"]

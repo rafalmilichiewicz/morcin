@@ -9,5 +9,6 @@ kubectl apply -f 07-phpmyadmin-svc.yaml
 kubectl apply -f 08-app-deployment.yaml
 kubectl apply -f 09-app-svc.yaml
 kubectl apply -f 10-app-hpa.yaml
+kubectl apply -f 10.5-websocket.yaml
 kubectl apply -f 11-ingress.yaml
 kubectl apply -f 12-network.yaml

@@ -2,3 +2,4 @@
 .mysqlp/**
 __pycache__
 model/data/**
+websocket
